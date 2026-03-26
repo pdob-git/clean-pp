@@ -47,3 +47,6 @@ Thumbs.db
 output.csv
 output.xlsx
 users.db
+
+# Session files
+agents/session*.md
