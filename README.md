@@ -18,27 +18,27 @@ This is a demonstration project showcasing Clean Architecture principles with SO
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        Presentation Layer                       │
-│                         (presentation/cli.py)                    │
-│                              CLI commands                         │
+│                         (presentation/cli.py)                   │
+│                              CLI commands                       │
 └───────────────────────────────┬─────────────────────────────────┘
                                 │ depends on
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                       Application Layer                          │
-│           (application/get_users.py, export_data.py)           │
-│                          Use Cases                               │
+│                       Application Layer                         │
+│           (application/get_users.py, export_data.py)            │
+│                          Use Cases                              │
 └───────────────────────────────┬─────────────────────────────────┘
                                 │ depends on
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                          Domain Layer                            │
-│           (domain/entities/user.py, repositories.py)             │
-│                    Entities & Interfaces                         │
+│                          Domain Layer                           │
+│           (domain/entities/user.py, repositories.py)            │
+│                    Entities & Interfaces                        │
 └───────────────────────────────┬─────────────────────────────────┘
                                 │ implements
                                 ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Infrastructure Layer                        │
+│                      Infrastructure Layer                       │
 │         (infrastructure/sqlite_repo.py, exporters/)             │
 │                    Concrete Implementations                     │
 └─────────────────────────────────────────────────────────────────┘
