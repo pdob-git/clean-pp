@@ -28,7 +28,12 @@ def build_cli() -> click.Group:
 
 def main() -> None:
     app = build_cli()
-    app()
+    app(
+        obj={
+            "get_users": app.obj["get_users"],
+            "export_use_case": app.obj["export_use_case"],
+        }
+    )
 
 
 if __name__ == "__main__":

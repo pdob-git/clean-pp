@@ -2,8 +2,10 @@ import click
 
 
 @click.group()
-def cli() -> None:
-    pass
+@click.pass_context
+def cli(ctx: click.Context) -> None:
+    if ctx.obj is None:
+        ctx.obj = {}
 
 
 @cli.command()
