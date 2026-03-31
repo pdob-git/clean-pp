@@ -1,9 +1,5 @@
 import click
 
-from clean_app.application.get_users import GetUsersUseCase
-from clean_app.infrastructure.exporters import get_exporter
-from clean_app.infrastructure.sqlite_repo import SQLiteUserRepository
-
 
 @click.group()
 def cli() -> None:
@@ -21,10 +17,10 @@ def login(host: str, user: str, password: str, db_path: str) -> None:
 
 
 @cli.command()
+@click.pass_context
 @click.option("--db-path", default="users.db", help="Path to SQLite database")
-def get_users(db_path: str) -> None:
-    repo = SQLiteUserRepository(db_path)
-    use_case = GetUsersUseCase(repo)
+def get_users(ctx: click.Context, db_path: str) -> None:
+    use_case = ctx.obj["get_users"]
     users = use_case.execute()
 
     if not users:
@@ -37,32 +33,25 @@ def get_users(db_path: str) -> None:
 
 
 @cli.command()
+@click.pass_context
 @click.option("--db-path", default="users.db", help="Path to SQLite database")
 @click.option(
     "--format",
     "export_format",
     default="csv",
     type=click.Choice(["csv", "excel"]),
-    help="Export format"
+    help="Export format",
 )
 @click.option("--output", required=True, help="Output file path")
-def export(db_path: str, export_format: str, output: str) -> None:
-    repo = SQLiteUserRepository(db_path)
-    get_use_case = GetUsersUseCase(repo)
+def export(ctx: click.Context, db_path: str, export_format: str, output: str) -> None:
+    get_use_case = ctx.obj["get_users"]
     users = get_use_case.execute()
 
     if not users:
         click.echo("No users to export.")
         return
 
-    exporter = get_exporter(export_format)
-
-    from clean_app.application.export_data import ExportDataUseCase
-    export_use_case = ExportDataUseCase(exporter)
-    export_use_case.execute(users, output)
+    export_use_case = ctx.obj["export_use_case"]
+    export_use_case.execute(users, output, export_format)
 
     click.echo(f"Exported {len(users)} users to {output}")
-
-
-if __name__ == "__main__":
-    cli()

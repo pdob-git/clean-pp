@@ -1,7 +1,7 @@
 import csv
 
 from clean_app.domain.entities.user import User
-from clean_app.infrastructure.exporters.base import DataExporter
+from clean_app.domain.exporters import DataExporter
 
 
 class CsvExporter(DataExporter):
@@ -14,10 +14,4 @@ class CsvExporter(DataExporter):
             writer = csv.writer(f)
             writer.writerow(["id", "name", "surname", "loginname", "email"])
             for user in users:
-                writer.writerow([
-                    user.id,
-                    user.name,
-                    user.surname,
-                    user.loginname,
-                    user.email
-                ])
+                writer.writerow([user.id, user.name, user.surname, user.loginname, user.email])

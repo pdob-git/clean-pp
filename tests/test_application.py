@@ -1,4 +1,3 @@
-
 from clean_app.application.export_data import ExportDataUseCase
 from clean_app.application.get_users import GetUsersUseCase
 from clean_app.domain.entities.user import User
@@ -79,9 +78,9 @@ class TestExportDataUseCase:
             User(1, "John", "Doe", "jdoe", "john@example.com"),
         ]
         exporter = MockExporter()
-        use_case = ExportDataUseCase(exporter)
+        use_case = ExportDataUseCase({"csv": exporter})
 
-        use_case.execute(users, "output.csv")
+        use_case.execute(users, "output.csv", "csv")
 
         assert exporter.exported_data is not None
         assert len(exporter.exported_data[0]) == 1

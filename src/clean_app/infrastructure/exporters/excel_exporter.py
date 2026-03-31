@@ -1,7 +1,7 @@
 import pandas as pd
 
 from clean_app.domain.entities.user import User
-from clean_app.infrastructure.exporters.base import DataExporter
+from clean_app.domain.exporters import DataExporter
 
 
 class ExcelExporter(DataExporter):

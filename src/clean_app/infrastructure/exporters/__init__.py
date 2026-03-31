@@ -1,4 +1,4 @@
-from clean_app.infrastructure.exporters.base import DataExporter
+from clean_app.domain.exporters import DataExporter
 from clean_app.infrastructure.exporters.csv_exporter import CsvExporter
 from clean_app.infrastructure.exporters.excel_exporter import ExcelExporter
 
