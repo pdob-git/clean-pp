@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def init_database(db_path: str = "users.db") -> None:
+def init_database(db_path: str = "users2.db") -> None:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
